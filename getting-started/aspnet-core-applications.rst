@@ -29,7 +29,7 @@ Creating a database
 
 As you can see from the snippet above, we'll be using SQL Server as a job storage in this article. Before configuring Hangfire, you'll need to create a database for it or use an existing one. Configuration strings below point to the ``HangfireTest`` database living in the ``SQLEXPRESS`` instance on a local machine.
 
-You can use SQL Server Management Studio or any other way to execute the following SQL command. If you are using other database name or instance, ensure you've changed connection strings when configuring Hangfire during the next steps.
+You can use SQL Server Management Studio or any other way to execute the following SQL command. If you are using another database name or instance, ensure you've changed connection strings when configuring Hangfire during the next steps.
 
 .. code-block:: sql
 
@@ -39,7 +39,7 @@ You can use SQL Server Management Studio or any other way to execute the followi
 Configuring Hangfire
 ---------------------
 
-We'll start our configuration process with defining configuration string for ``Hangfire.SqlServer`` package. Consider you have an ``sqlexpress`` named instance running on localhost, and **just created the "HangfireTest" database**. Current user should be able to create tables, to allow automatic migrations to do their job.
+We'll start our configuration process with defining configuration string for ``Hangfire.SqlServer`` package. Consider you have an ``sqlexpress`` named instance running on localhost, and **just created the "HangfireTest" database**. The current user should be able to create tables, to allow automatic migrations to do their job.
 
 Also, ``Hangfire.AspNetCore`` package has a logging integration with ASP.NET Core applications. Hangfire's log messages sometimes very important and help to diagnose different issues. ``Information`` level allows to see how Hangfire is working, and ``Warning`` and upper log level help to investigate problems.
 
@@ -63,7 +63,7 @@ Open the ``appsettings.json`` file, and add the highlighted lines from the follo
      }
    }
 
-After updating the application settings, open the ``Startup.cs`` file. Startup class is the heart of ASP.NET Core application's configuration. First we need to import the ``Hangfire`` namespace.
+After updating the application settings, open the ``Startup.cs`` file. Startup class is the heart of ASP.NET Core application's configuration. First, we need to import the ``Hangfire`` namespace.
 
 .. code-block:: csharp
    :emphasize-lines: 3,4
@@ -141,13 +141,13 @@ After registering Hangfire types, you can now choose features you need to add to
 Running Application
 --------------------
 
-Run the following command in to to start an application, or click the :kbd:`F5` button in Visual Studio.
+Run the following command to start an application, or click the :kbd:`F5` button in Visual Studio.
 
 .. code-block:: bash
    
    dotnet run
 
-After application is started, the following messages should appear, if background processing was started successfully. These lines contain messages regarding SQL Server Job Storage that is used to persist background jobs, and Background Job Server, that's processing all the background jobs.
+After the application is started, the following messages should appear, if background processing was started successfully. These lines contain messages regarding SQL Server Job Storage that is used to persist background jobs, and Background Job Server, that's processing all the background jobs.
 
 .. code-block:: bash
 
@@ -165,13 +165,13 @@ After application is started, the following messages should appear, if backgroun
             Shutdown timeout: 00:00:15
             Schedule polling interval: 00:00:15
 
-The following message should also appear, since we created background job, whose only behavior is to write a message to the console.
+The following message should also appear, since we created a background job, whose only behavior is to write a message to the console.
 
 .. code-block:: bash
 
    Hello world from Hangfire!
 
-When application is started, open the following URL (assuming your app is running on the 5000 port) to access to the Hangfire Dashboard interface. As we can see, our background job was completed successfully.
+When the application is started, open the following URL (assuming your app is running on the 5000 port) to access to the Hangfire Dashboard interface. As we can see, our background job was completed successfully.
 
 .. code-block:: bash
 
@@ -186,4 +186,4 @@ When you finished working with the application, press the :kbd:`Ctrl+C` in your 
    info: Hangfire.BackgroundJobServer[0]
       Hangfire Server stopped.
 
-You can also kill your process, but in this case some background jobs may be delayed in invocation.
+You can also kill your process, but in this case, some background jobs may be delayed in invocation.
